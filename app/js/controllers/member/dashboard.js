@@ -12,7 +12,6 @@ angular.module('app').controller('Dashboard', function($scope, Api) {
   $scope.saveStory = function() {
     $scope.newStoryForm.error = '';
     $scope.newStoryForm.errorDismissed = false;
-    $scope.story.world = 'Earth';
     Api.Story.save($scope.story, function(story) {
       $scope.state.go('story', { slug: story.slug });
     }, function(response) {

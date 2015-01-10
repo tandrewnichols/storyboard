@@ -3,7 +3,7 @@ angular.element(document).ready(function() {
     if (window.author || window.authorError) {
       angular.module('app').run(function($rootScope) {
         $rootScope.author = window.author;
-        $rootScope.authorError = window.authorError;
+        $rootScope.authorError = authorError;
       });
       angular.bootstrap(document, ['app']);
     } else {

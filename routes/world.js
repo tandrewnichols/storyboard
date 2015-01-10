@@ -16,7 +16,7 @@ router.post('/', function(req, res, next) {
 
 // Get ALL worlds associated with this user
 router.get('/', function(req, res, next) {
-  req.author.getAllByType('World', function(err, nodes) {
+  req.author.getAll('World', function(err, nodes) {
     if (err) res.sendError(err);
     else res.status(200).json(_.pluck(nodes, 'data'));
   });

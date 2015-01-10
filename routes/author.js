@@ -1,4 +1,3 @@
-// TODO: remove unused things
 var router = module.exports = require('express').Router();
 var bcrypt = require('bcrypt');
 var _ = require('lodash');
@@ -8,12 +7,12 @@ var requireMember = require('../lib/middleware/requireMember');
 
 var neoResponseCallback = function(res, err, author) {
   if (err) res.sendError(err);
-  else res.status(200).json(author.toJson());
+  else res.status(200).json(author.get());
 };
 
 var cookie = function(res, author) {
   res.cookie('author', author.encrypt(), { path: '/', maxAge: oneYear });
-  res.status(200).json(author.toJson());
+  res.status(200).json(author.get());
 };
 
 router.post('/:id', requireMember, function(req, res, next) {
@@ -57,7 +56,7 @@ router.get('/', function(req, res, next) {
         // Member trying to join but email already exists
         } else if (author) {
           // TODO: 403 here?
-          res.status(200).json(author.toJson());
+          res.status(200).json(author.get());
         } else {
           res.status(200).end();
         }

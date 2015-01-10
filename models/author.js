@@ -3,6 +3,16 @@ var util = require('util');
 var _ = require('lodash');
 var nconf = require('nconf');
 
+var gravatar = function(node) {
+  var md5 = crypto.createHash('md5');
+  if (typeof node === 'object') {
+    md5.update(node.data.email);
+  } else if (typeof node === 'string') {
+    md5.update(node);
+  }
+  return util.format('http://www.gravatar.com/avatar/%s?d=mm', md5.digest('hex'));
+};
+
 var compare = function(orig, cmp) {
   var sentinel;
   if (orig.length !== cmp.length) return false;
@@ -56,24 +66,19 @@ module.exports = {
         email: true
       }
     },
-
-    // Override base implementation to leave password out
-    toJson: function() {
+    get: function() {
       return _.omit(this.data, 'password');
     },
-
-    // Encrypt the current user's uid
     encrypt: function() {
       return encrypt(this.data.uid);
     },
-
-    // Decrypt the current user's uid
     decrypt: function() {
       return decrypt(this.data.uid);
     },
-
-    // Get all nodes connected by relationship "type"
-    getAllByType: function(type, limit, cb) {
+    changeEmail: function(email, cb) {
+      return this.update({ email: email, gravatar: gravatar(email) }, cb);
+    },
+    getAll: function(type, limit, cb) {
       if (typeof limit === 'function') {
         cb = limit;
         limit = 5;
@@ -84,27 +89,13 @@ module.exports = {
       } else {
         query.exec(cb);
       }
-    },
-
-    // Determine whether a node is connected to this node, at any length
-    isConnected: function(node, cb) {
-      if (typeof node === 'object') node = node.data.uid;
-      if (this.data.uid === node) cb(null, true);
-      else this.Graph.query('match (a)-[r*]-(n) where a.uid = ' + this.data.uid + ' and n.uid = ' + node + ' return n', cb);
-    },
-
-    // Override base version of onBeforeSave
-    onBeforeSave: function(node, cb) {
-      if (node.data.email) {
-        var md5 = crypto.createHash('md5');
-        md5.update(node.data.email);
-        node.data.gravatar = util.format('http://www.gravatar.com/avatar/%s?d=mm', md5.digest('hex'));
-      }
     }
   },
   static: {
-    // Static implementations of the above
     encrypt: encrypt,
-    decrypt: decrypt
+    decrypt: decrypt,
+    changeEmail: function(uid, email, cb) {
+      return this.get(uid).update({ email: email, gravatar: gravatar(email) }, cb);
+    }
   }
 };
