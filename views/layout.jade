@@ -17,7 +17,7 @@ html(lang="en")
           }
         }
       };
-      xhr.open('GET', '/api/author?full=1')
+      xhr.open('GET', '/api/author?with=story&with=world')
       xhr.send();
     base(href="/")
   body(ng-init="isDev=#{isDev}")

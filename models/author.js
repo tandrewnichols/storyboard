@@ -21,6 +21,8 @@ module.exports = {
       }
     },
 
+    plural: 'authors',
+
     /*
      * Override the base implementation to leave password out
      */
@@ -115,6 +117,7 @@ module.exports = {
    * Static methods for the Author class
    */
   static: {
+    plural: 'authors',
     /*
      * Helper for the decrypt method to compare two hashes
      */

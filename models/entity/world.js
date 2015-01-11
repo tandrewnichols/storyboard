@@ -4,7 +4,11 @@ module.exports = {
       indexes: {},
       defaults: {},
       unique: {}
-    }
+    },
+
+    plural: 'worlds'
   },
-  static: {}
+  static: {
+    plural: 'worlds'
+  }
 };

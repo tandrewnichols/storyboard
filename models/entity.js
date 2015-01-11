@@ -13,7 +13,11 @@ module.exports = {
       unique: {
         slug: true
       }
-    }
+    },
+
+    plural: 'entities'
   },
-  static: {}
+  static: {
+    plural: 'entities'
+  }
 };

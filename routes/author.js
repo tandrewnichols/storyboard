@@ -4,6 +4,8 @@ var _ = require('lodash');
 var oneYear = 365*24*60*60*1000
 var crypto = require('crypto');
 var canEdit = require('../lib/middleware/canEdit');
+var extend = require('config-extend');
+var async = require('async');
 
 /*
  * Update a field on an existing author
@@ -50,21 +52,11 @@ router.get('/:uid', function(req, res, next) {
 });
 
 /*
- * Get currently logged in user
+ * Get currently logged in member, login, or check whether an email already exists
  * Invoked from angular with Api.author.get()
  */
 router.get('/', function(req, res, next) {
-  if (req.cookies.author) res.status(200).json(req.author.toJson());
-  else next();
-});
-
-/*
- * Login or check whether an email already exists
- * Invoked from angular with Api.author.get()
- */
-router.get('/', function(req, res, next) {
-  if (!req.query.email) res.standard(404);
-  else {
+  if (req.query.email) {
     req.models.Author.findOne({ email: req.query.email }, function(err, author) {
       if (err) next(err);
       // No author found with this email. Good if joining, bad if logging in.
@@ -87,6 +79,29 @@ router.get('/', function(req, res, next) {
         }
       }
     });
+  // Not querying for author by email. If we have a logged in user, return that.
+  } else if (req.author) {
+    // If we're requesting additional resources with the author, fetch them now
+    if (req.query.with) {
+      async.reduce(req.query.with, {}, function(memo, type, next) {
+        var cls = _.classify(type);
+        req.author.getAllByType(cls, function(err, nodes) {
+          memo[ req.models[cls].plural ] = _.map(nodes, function(node) {
+            return node.toJson()
+          });
+          next(err, memo);
+        });
+      }, function(err, results) {
+        var author = req.author.toJson();
+        // results will be something like { worlds: [], stories: [] }
+        extend(author, results);
+        res.status(200).json(author);
+      });
+    } else {
+      res.status(200).json(req.author.toJson());
+    }
+  } else {
+    res.standard(404);
   }
 });
 
