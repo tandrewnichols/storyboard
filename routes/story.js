@@ -5,7 +5,7 @@ var _ = require('lodash');
 router.post('/', function(req, res, next) {
   var nodes = [
     { model: req.models.Story, data: _.omit(req.body, 'world') },
-    { model: req.models.World, data: req.body.world || { name: 'Earth' }, func: 'findOrCreate' }
+    { model: req.models.World, data: req.body.world, func: 'findOrCreate' }
   ];
 
   req.Node.createNodes(nodes, function(err, nodes) {
@@ -25,7 +25,7 @@ router.post('/', function(req, res, next) {
         if (err) res.sendError(err);
         else {
           // Wrap this into a .createUniqueRelationship function on Node (or instance)
-          req.Graph.start().match('(a:Author { uid: {author} }),(w:World { uid: {world} }').createUnique('(a)-[r:CREATED]->(w)').return('r', function(err, rel) {
+          req.Graph.start().match('(a:Author),(w:World)').where({ 'a.uid': req.author.data.uid, 'w.uid': world.data.uid }).createUnique('(a)-[r:CREATED]->(w)').return('r', function(err, rel) {
             if (err) res.sendError(err);
             else res.status(200).json(story.data);
           });
@@ -37,7 +37,7 @@ router.post('/', function(req, res, next) {
 
 // Get all stories on all worlds for a user
 router.get('/', function(req, res, next) {
-  req.author.getAll('Story', function(err, nodes) {
+  req.author.getAllByType('Story', function(err, nodes) {
     if (err) res.sendError(err);
     else res.status(200).json(_.pluck(nodes, 'data'));
   });
