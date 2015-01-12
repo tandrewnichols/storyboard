@@ -2,6 +2,8 @@ angular.module('app', ['ngResource', 'ui.router', 'ngRoute', 'ngSanitize', 'ngAn
   $rootScope.state = $state;
   _.mixin(_.string);
   _.mixin(_._safe);
+  _.mixin(_._mixins);
+
   $rootScope.patterns = {
     email: /^([a-zA-Z0-9_\.\-+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})$/
   };

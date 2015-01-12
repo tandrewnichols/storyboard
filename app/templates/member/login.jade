@@ -6,7 +6,7 @@
     div.alert.alert-danger.mll.alert-dismissable
       button.close(type="button", ng-click="dismissed=true", aria-hidden="true") &times;
       | {{ error }}
-form.form-horizontal.mtl(name="loginForm", blur-track="true")
+form.form-horizontal.mtl(name="loginForm", blur-track="true", novalidate)
   .form-group(ng-class="{ 'has-error': loginForm.email.$invalid && loginForm.email.$blurred }")
     label.col-xs-2.control-label(for="email") Email
     .col-xs-8

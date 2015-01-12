@@ -17,6 +17,7 @@ module.exports = {
       'bower_components/lodash/dist/lodash.js',
       'node_modules/safe-obj/dist/safe.js',
       'node_modules/underscore.string/lib/underscore.string.js',
+      'common/mixins.js',
       'bower_components/angular-lodash/angular-lodash.js',
       'vendor/js/**/*.js',
       'app/js/app.js',

@@ -5,7 +5,7 @@ div(ng-show="author.worlds.length")
         .col-xs-11
           h3.text-primary Worlds
           hr
-      .row.clickable(ng-repeat="world in author.worlds", ng-click="state.go('world', { slug: world.slug })")
+      .row.clickable(ng-repeat="world in author.worlds", ng-click="state.go('world.details', { slug: world.slug })")
         .col-xs-11.well
           .media
             .pull-left(href="#")
@@ -18,7 +18,7 @@ div(ng-show="author.worlds.length")
         .col-xs-11
           h3.text-primary Stories
           hr
-      .row.clickable(ng-repeat="story in author.stories", ng-click="state.go('story', { slug: story.slug })")
+      .row.clickable(ng-repeat="story in author.stories", ng-click="state.go('story.details', { slug: story.slug })")
         .col-xs-11.well
           .media
             .pull-left(href="#")

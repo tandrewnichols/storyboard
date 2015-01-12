@@ -10,6 +10,13 @@ module.exports = {
       spawn: false
     }
   },
+  common: {
+    files: ['common/**/*.js'],
+    tasks: ['ngtemplates:dev', 'concat_sourcemap:dev', 'ngAnnotate:dev', 'server'],
+    options: {
+      spawn: false
+    }
+  },
   tasks: {
     files: ['tasks/**/*.js'],
     tasks: ['clean', 'copy:dev', 'ngtemplates:dev', 'concat_sourcemap:dev', 'ngAnnotate:dev', 'less:dev', 'server'],

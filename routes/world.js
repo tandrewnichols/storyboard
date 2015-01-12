@@ -19,3 +19,7 @@ router.get('/', function(req, res, next) {
     res.status(200).json(_.pluck(worlds, 'data'));
   });
 });
+
+router.put('/:uid', function(req, res, next) {
+  
+});
