@@ -14,7 +14,7 @@ module.exports = {
         theme: 'spacelab',
         inverse: true,
         gravatar: function(node) {
-          module.exports.static.gravatar(node);
+          return module.exports.static.gravatar(node);
         }
       },
       unique: {

@@ -6,7 +6,7 @@ angular.module('app').controller('Join', function($scope, Api) {
       Api.Member.save($scope.member, function(member) {
         if (member.uid) {
           $scope.$root.author = member; 
-          $scope.state.go('dashboard');
+          $scope.state.go('member.dashboard');
         }
       }, function(response) {
         $scope.error = _.safe(response, 'data.description', 'An error occurred while creating your account. Please try again later.');
