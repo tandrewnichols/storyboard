@@ -1,4 +1,4 @@
-angular.module('app').controller('Personal', function($scope, Api) {
+angular.module('app').controller('AuthorPersonal', function($scope, Api) {
   $scope.changePenname = function() {
     $scope.pennameForm.error = '';
     $scope.pennameForm.errorDismissed = false;

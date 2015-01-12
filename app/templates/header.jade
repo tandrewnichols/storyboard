@@ -25,7 +25,7 @@ nav.navbar.navbar-fixed-top(ng-class="{ 'navbar-default': !author.inverse, 'navb
               span.glyphicon.glyphicon-plus-sign
               | &nbsp;&nbsp;New World&nbsp;&nbsp;
           li(ng-repeat="world in author.worlds")
-            a(href="#", ui-sref="world({ slug: world.slug })")
+            a(href="#", ui-sref="world.details({ slug: world.slug })")
               span.glyphicon.glyphicon-globe
               | &nbsp;&nbsp;{{ world.name }}&nbsp;&nbsp;
       li.dropdown
@@ -48,11 +48,11 @@ nav.navbar.navbar-fixed-top(ng-class="{ 'navbar-default': !author.inverse, 'navb
           b.caret
         ul.dropdown-menu
           li
-            a(href="#", ui-sref="dashboard")
+            a(href="#", ui-sref="member.dashboard")
               span.glyphicon.glyphicon-home
               | &nbsp;&nbsp;Dashboard
           li
-            a(href="#", ui-sref="profile.personal")
+            a(href="#", ui-sref="member.profile.personal")
               span.glyphicon.glyphicon-user
               | &nbsp;&nbsp;Profile
           li
@@ -60,6 +60,6 @@ nav.navbar.navbar-fixed-top(ng-class="{ 'navbar-default': !author.inverse, 'navb
               span.glyphicon.glyphicon-log-out
               | &nbsp;&nbsp;Logout
     ul.nav.navbar-nav.navbar-right(ng-show="!author")
-      li: a(href="#", ui-sref="join") Join
-      li: a(href="#", ui-sref="login") Login
+      li: a(href="#", ui-sref="member.join") Join
+      li: a(href="#", ui-sref="member.login") Login
 div(ng-if="isDev", ng-include="'modals/dump.html'")

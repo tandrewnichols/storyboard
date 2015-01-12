@@ -1,4 +1,15 @@
 .row
   .col-xs-2.sidebar
+    ul.nav.nav-pills.nav-stacked
+      li(ui-sref-active="active")
+        a(href="#", ui-sref="world.details") Details
+      li(ui-sref-active="active")
+        a(href="#", ui-sref="world.characters") Characters
+      li(ui-sref-active="active")
+        a(href="#", ui-sref="world.magic") Magic
+      li(ui-sref-active="active")
+        a(href="#", ui-sref="world.events") Events
+      li(ui-sref-active="active")
+        a(href="#", ui-sref="world.items") Items
   .col-xs-9
-    div World template
+    div(ui-view="")

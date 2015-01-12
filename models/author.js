@@ -2,6 +2,7 @@ var crypto = require('crypto');
 var util = require('util');
 var _ = require('lodash');
 var nconf = require('nconf');
+var util = require('util');
 
 module.exports = {
   instance: {
@@ -53,22 +54,64 @@ module.exports = {
 
     /*
      * Get all nodes of type "type" that were created by this author
+     * @param {String|Array} type - The type or types to fetch
+     * @param {Number} limit - The number of nodes to return
+     * @param {Function} cb - The callback
      */
     getAllByType: function(type, limit, cb) {
+      var self = this;
+
+      // Make sure type is an array
+      if (typeof type === 'string') {
+        type = [ type ];
+      }
+      
+      // If no limit is passed, default to 5
       if (typeof limit === 'function') {
         cb = limit;
         limit = 5;
       }
-      var query = this.Graph.start().match('(a:Author)-[:CREATED]->(n:' + type + ')').where({ 'a.uid': this.data.uid }).return('n').orderBy('n.createdDate')
-      if (limit) { 
-        query.limit(limit, cb);
-      } else {
-        query.exec(cb);
-      }
+
+      // Set up the query once now
+      var cypher = "match (a:Author)-[:CREATED]->(n:%s) where a.uid = '" + this.data.uid + "' with a, n order by n.createdDate" + (limit ? " limit " + limit : "") + " return n";
+      var trans;
+
+      _.each(type, function(t) {
+        // Build the query for this type
+        var query = util.format(cypher, _.classify(t));
+        // If the transaction already exists, add a new query; otherwise, create one
+        if (trans) {
+          trans.add(query);
+        } else {
+          trans = self.Transaction.create(query);
+        }
+      });
+
+      // Execute the query
+      trans.exec(function(err, open) {
+        if (err) return cb(err);
+        // Commit the transaction
+        open.commit(function(err, commit) {
+          // commit.results looks like [ { columns: [...], data: [...] }, { columns: [...], data: [...] } ]
+          // where each item corresponds to a query in the transaction
+          var results = _.reduce(commit.results, function(memo, result, i) {
+            // Get the class name
+            var cls = _.classify(type[i]);
+            // Find the plural form of the class
+            var plural = self.Node.__models__[ cls ].plural;
+            // Flatten the result set (sometimes it comes back as [ [ {...data...} ] ])
+            memo[ plural ] = _.flatten(result.data);
+            return memo;
+          }, {});
+          cb(err, results);
+        });
+      });
     },
 
     /*
      * Determine if this author can edit a given node
+     * @param {Node|String} node - The node instance or string uid to be edited
+     * @param {Function} cb - The callback
      */
     canEdit: function(node, cb) {
       var uid = typeof node === 'object' ? node.data.uid : node;
@@ -92,6 +135,8 @@ module.exports = {
 
     /*
      * Determine if this author can view a given node
+     * @param {Node|String} node - The node instance or string uid to be viewed
+     * @param {Function} cb - The callback
      */
     canView: function(node, cb) {
       // If the author is editing his/her own profile, allow it
@@ -118,6 +163,7 @@ module.exports = {
    */
   static: {
     plural: 'authors',
+
     /*
      * Helper for the decrypt method to compare two hashes
      */

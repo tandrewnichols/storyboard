@@ -4,15 +4,15 @@ angular.module('app').controller('Graph', function($scope, $http) {
     $http.get('/api/admin/labels').then(function(result) {
       $scope.labels = $scope.labels.concat(result.data);
     }, function(response) {
-      $scope.error = error.data.description.message;
+      $scope.error = response.data.description.message;
     });
   };
 
   $scope.dump = function() {
     $http['delete']('/api/admin/nodes' + (!$scope.selected || $scope.selected === 'All' ? '' : '/' + $scope.selected)).then(function(result) {
       $scope.success = 'Successfully deleted all ' + $scope.selected + ' nodes.';
-    }, function(error) {
-      $scope.error = error.data.description.message;
+    }, function(response) {
+      $scope.error = response.data.description.message;
     });
   };
 });

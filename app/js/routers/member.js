@@ -1,36 +1,47 @@
-angular.module('app').config(function($stateProvider) {
+angular.module('app').config(function($urlRouterProvider, $stateProvider) {
+  $urlRouterProvider.when('/profile', '/profile/personal');
   $stateProvider
-    .state('join', {
+    .state('member', {
+      url: '',
+      template: '<ui-view/>',
+      resolve: {
+        hideContainer: function($rootScope) {
+          $rootScope.hideContainer = false;
+          return true;
+        }
+      }
+    })
+    .state('member.join', {
       url: '/join',
       templateUrl: 'member/join.html',
       controller: 'Join'
     })
-    .state('login', {
+    .state('member.login', {
       url: '/login',
       templateUrl: 'member/login.html',
       controller: 'Login'
     })
-    .state('profile', {
+    .state('member.profile', {
       url: '/profile',
       abstract: true,
       templateUrl: 'member/profile/index.html',
-      controller: 'Profile',
+      controller: 'AuthorProfile',
       access: 'member'
     })
-    .state('profile.personal', {
-      url: '/profile/personal',
+    .state('member.profile.personal', {
+      url: '/personal',
       templateUrl: 'member/profile/personal.html',
-      controller: 'Personal'
+      controller: 'AuthorPersonal'
     })
-    .state('profile.appearance', {
-      url: '/profile/appearance',
+    .state('member.profile.appearance', {
+      url: '/appearance',
       templateUrl: 'member/profile/appearance.html',
-      controller: 'Appearance'
+      controller: 'AuthorAppearance'
     })
-    .state('dashboard', {
+    .state('member.dashboard', {
       url: '/dashboard',
       templateUrl: 'member/dashboard.html',
-      controller: 'Dashboard',
+      controller: 'AuthorDashboard',
       access: 'member'
     });
 });

@@ -1,3 +1,3 @@
-angular.module('app').controller('Profile', function($scope) {
+angular.module('app').controller('AuthorProfile', function($scope) {
 
 });

@@ -1,7 +1,7 @@
 .well
   h4.text-primary Change Pen Name
   p
-    em Current pen name:&nbsp;
+    em Current pen name:&nbsp;&nbsp;
       span.text-primary {{ author.penname }}
   form.form-horizontal(name="pennameForm", novalidate, blur-track="true")
     .form-group
@@ -17,7 +17,7 @@
 .well
   h4.text-primary Change Email
   p
-    em Current email:&nbsp;
+    em Current email:&nbsp;&nbsp;
       span.text-primary {{ author.email }}
   form.form-horizontal(name="emailForm", novalidate, blur-track="true")
     .form-group(ng-class="{ 'has-error': update.email && emailForm.email.$error.pattern && emailForm.email.$blurred }")

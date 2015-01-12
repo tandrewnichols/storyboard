@@ -73,7 +73,9 @@ router.get('/', function(req, res, next) {
             else if (!match) res.sendError('Invalid email or password.');
             else {
               res.cookie('author', author.encrypt(), { path: '/', maxAge: oneYear });
-              res.status(200).json(author.toJson());
+              author.getAllByType(['story', 'world'], function(err, nodes) {
+                res.status(200).json(extend(author.toJson(), nodes));
+              });
             }
           });
         }
@@ -83,19 +85,9 @@ router.get('/', function(req, res, next) {
   } else if (req.author) {
     // If we're requesting additional resources with the author, fetch them now
     if (req.query.with) {
-      async.reduce(req.query.with, {}, function(memo, type, next) {
-        var cls = _.classify(type);
-        req.author.getAllByType(cls, function(err, nodes) {
-          memo[ req.models[cls].plural ] = _.map(nodes, function(node) {
-            return node.toJson()
-          });
-          next(err, memo);
-        });
-      }, function(err, results) {
+      req.author.getAllByType(req.query.with, function(err, nodes) {
         var author = req.author.toJson();
-        // results will be something like { worlds: [], stories: [] }
-        extend(author, results);
-        res.status(200).json(author);
+        res.status(200).json(extend(author, nodes));
       });
     } else {
       res.status(200).json(req.author.toJson());

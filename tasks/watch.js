@@ -4,7 +4,7 @@ module.exports = {
     tasks: ['less:dev']
   },
   server: {
-    files: ['app.js', 'routes/**/*.js', 'lib/**/*.js', 'views/**/*.jade'],
+    files: ['app.js', 'routes/**/*.js', 'lib/**/*.js', 'models/**/*.js', 'config/**/*.json', 'views/**/*.jade'],
     tasks: ['server'],
     options: {
       spawn: false
