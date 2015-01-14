@@ -9,7 +9,7 @@ angular.module('app').controller('Join', function($scope, Api) {
           $scope.state.go('member.dashboard');
         }
       }, function(response) {
-        $scope.error = _.safe(response, 'data.description', 'An error occurred while creating your account. Please try again later.');
+        $scope.error = $scope.isDev ? response : 'An error occurred while creating your account. Please try again later.';
       }); 
     }
   };
@@ -17,7 +17,11 @@ angular.module('app').controller('Join', function($scope, Api) {
   $scope.checkEmail = function() {
     if ($scope.member && $scope.member.email) {
       Api.Member.get({ email: $scope.member.email }, function(member) {
-        $scope.registerForm.penname.$error.taken = Boolean(member.uid);
+        $scope.registerForm.email.$error.taken = Boolean(member.uid);
+      }, function(response) {
+        if (response.status === 409) {
+          $scope.registerForm.email.$error.taken = true;
+        }
       });
     }
   };

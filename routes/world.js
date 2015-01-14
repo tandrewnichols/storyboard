@@ -1,6 +1,8 @@
 var router = module.exports = require('express').Router();
 var _ = require('lodash');
 
+router.param('uid', router.middleware.uid);
+
 // Create a new world
 router.post('/', function(req, res, next) {
   req.models.World.create(req.body, function(err, world) {
@@ -21,5 +23,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.put('/:uid', function(req, res, next) {
-  
+  console.log(req.body);
+  //req.models.World.find({ uid: req.params.uid }).update() 
 });

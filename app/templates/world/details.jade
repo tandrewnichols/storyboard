@@ -16,5 +16,5 @@
           textarea#description.form-control(type="text", rows="4", name="name", ng-model="edit.description", style="resize: none")
       .form-group
         .col-xs-10.col-sm-offset-2
-          button.btn.btn-primary(type="submit", ng-click="update()", ng-disabled="!edit.name") Update
+          button.btn.btn-primary(type="submit", ng-click="update()", ng-disabled="!edit.name || edit | equals : world") Update
           button.btn.btn-default(type="button", ng-click="reset()", ng-disabled="edit | equals : world") Reset
