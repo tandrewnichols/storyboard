@@ -37,5 +37,15 @@ angular.module('app').config(function($urlRouterProvider, $stateProvider) {
       url: '/items',
       templateUrl: 'world/items.html',
       controller: 'WorldItem'
+    })
+    .state('world.locations', {
+      url: '/locations',
+      templateUrl: 'world/locations.html',
+      controller: 'WorldLocation'
+    })
+    .state('world.ideas', {
+      url: '/ideas',
+      templateUrl: 'world/ideas.html',
+      controller: 'WorldIdea'
     });
 });
