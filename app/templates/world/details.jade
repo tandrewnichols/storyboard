@@ -14,6 +14,7 @@
         label.col-xs-2.control-label(for="name") Description
         .col-xs-10
           textarea#description.form-control(type="text", rows="4", name="name", ng-model="edit.description", style="resize: none")
+      .col-xs-10.col-sm-offset-2(error="error", dismissed="dismissed", ng-show="error && !dismissed")
       .form-group
         .col-xs-10.col-sm-offset-2
           button.btn.btn-primary(type="submit", ng-click="update()", ng-disabled="!edit.name || edit | equals : world") Update
