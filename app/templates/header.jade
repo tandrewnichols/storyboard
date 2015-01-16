@@ -21,7 +21,7 @@ nav.navbar.navbar-fixed-top(ng-class="{ 'navbar-default': !author.inverse, 'navb
           b.caret
         ul.dropdown-menu
           li
-            a(href="#", ui-sref="world")
+            a(href="#", ui-sref="new({ type: 'world' })")
               span.glyphicon.glyphicon-plus-sign
               | &nbsp;&nbsp;New World&nbsp;&nbsp;
           li(ng-repeat="world in author.worlds")

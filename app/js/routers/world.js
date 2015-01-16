@@ -1,6 +1,15 @@
 angular.module('app').config(function($urlRouterProvider, $stateProvider) {
   $urlRouterProvider.when('/world/:slug', '/world/:slug/details');
   $stateProvider
+    .state('new', {
+      url: '/new/:type',
+      templateUrl: function($stateParams) {
+        return $stateParams.type + '/new.html';
+      },
+      controller: function($stateParams) {
+        return _.classify($stateParams.type);
+      }
+    })
     .state('world', {
       url: '/world/:slug',
       abstract: true,
