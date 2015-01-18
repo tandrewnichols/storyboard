@@ -1,68 +1,86 @@
-div(ng-show="author.worlds.length")
-  .row
-    .col-xs-6
-      .row
-        .col-xs-11
-          h3.text-primary Worlds
-          hr
-      .row.clickable(ng-repeat="world in author.worlds", ng-click="state.go('world.details', { slug: world.slug })")
-        .col-xs-11.well
-          .media
-            .pull-left(href="#")
-              img.media-object(ng-if="world.image", height="50", width="50", ng-src="{{ world.img }}", alt="{{ world.name }}")
-              span.glyphicon.glyphicon-globe(ng-if="!world.image", style="font-size: 50px;")
-            .media-body
-              h4.media-heading {{ world.name }}
-    .col-xs-6
-      .row
-        .col-xs-11
-          h3.text-primary Stories
-          hr
-      .row.clickable(ng-repeat="story in author.stories", ng-click="state.go('story.details', { slug: story.slug })")
-        .col-xs-11.well
-          .media
-            .pull-left(href="#")
-              img.media-object(ng-if="story.image", height="50", width="50", ng-src="{{ story.img }}", alt="{{ story.title }}")
-              span.glyphicon.glyphicon-book(ng-if="!story.image", style="font-size: 50px;")
-            .media-body
-              h4.media-heading {{ story.title }}
-div(ng-show="!author.worlds.length && !author.stories.length")
-  div.jumbotron
-    h1 Welcome to Storyboard
-    hr
-    div.row
-      div.col-xs-6
-        p It looks like you haven't created any worlds yet. Let's get started on that now!
-      div.col-xs-6
-        p  Or if your story is set in the real world and you don't need to do any world building, just jump right into your story.
-    div.row
-      div.col-xs-6
-        button.btn.btn-primary(ng-click="newWorld = true", ng-show="!newWorld")
-          span.glyphicon.glyphicon-globe
-          | &nbsp;&nbsp;Create a world
-        form(name="newWorldForm", novalidate, ng-show="newWorld")
-          .form-group
-            label.control-label(for="name", style="font-weight: normal") Let's start with a name. You'll be able to add lots of other details later.
-            input.form-control#name(name="name", ng-model="world.name")
-          .form-group.btn-row
-            button.btn.btn-primary(type="button", ng-click="saveWorld()") Save
-            button.btn.btn-default(type="button", ng-click="newWorld = false") Cancel
-          .form-group(ng-show="newWorldForm.error && !newWorldForm.errorDismissed")
-            .alert.alert-danger.alert-dismissable
-              button.close(type="button", aria-hidden="true", ng-click="newWorldForm.errorDismissed = true") &times;
-              | {{ newWorldForm.error }}
-      div.col-xs-6
-        button.btn.btn-primary(ng-click="newStory = true", ng-show="!newStory")
-          span.glyphicon.glyphicon-book
-          | &nbsp;&nbsp;Start a story
-        form(name="newStoryForm", novalidate, ng-show="newStory")
-          .form-group
-            label.control-label(for="title", style="font-weight: normal") What's your story called? Don't worry, you can change this later.
-            input.form-control#title(name="title", ng-model="story.title")
-          .form-group.btn-row
-            button.btn.btn-primary(type="button", ng-click="saveStory()") Save
-            button.btn.btn-default(type="button", ng-click="newStory = false") Cancel
-          .form-group(ng-show="newStoryForm.error && !newStoryForm.errorDismissed")
-            .alert.alert-danger.alert-dismissable
-              button.close(type="button", aria-hidden="true", ng-click="newStoryForm.errorDismissed = true") &times;
-              | {{ newStoryForm.error }}
+.navmenu.navmenu-default.navmenu-fixed-left(style="width: 250px; margin-top: 53px;")
+  ul.nav.navmenu-nav
+    li(ui-sref-active="active")
+      a(href="#", ui-sref="world.details") Worlds
+    li(ui-sref-active="active")
+      a(href="#", ui-sref="world.characters") Stories
+    li(ui-sref-active="active")
+      a(href="#", ui-sref="world.magic") Magic
+    li(ui-sref-active="active")
+      a(href="#", ui-sref="world.events") Events
+    li(ui-sref-active="active")
+      a(href="#", ui-sref="world.items") Items
+    li(ui-sref-active="active")
+      a(href="#", ui-sref="world.locations") Locations
+    li(ui-sref-active="active")
+      a(href="#", ui-sref="world.ideas") Ideas
+div
+  div(ui-view="")
+//-div(ng-show="author.worlds.length")
+  //-.row
+    //-.col-xs-6
+      //-.row
+        //-.col-xs-11
+          //-h3.text-primary Worlds
+          //-hr
+      //-.row.clickable(ng-repeat="world in author.worlds", ng-click="state.go('world.details', { slug: world.slug })")
+        //-.col-xs-11.well
+          //-.media
+            //-.pull-left(href="#")
+              //-img.media-object(ng-if="world.image", height="50", width="50", ng-src="{{ world.img }}", alt="{{ world.name }}")
+              //-span.glyphicon.glyphicon-globe(ng-if="!world.image", style="font-size: 50px;")
+            //-.media-body
+              //-h4.media-heading {{ world.name }}
+    //-.col-xs-6
+      //-.row
+        //-.col-xs-11
+          //-h3.text-primary Stories
+          //-hr
+      //-.row.clickable(ng-repeat="story in author.stories", ng-click="state.go('story.details', { slug: story.slug })")
+        //-.col-xs-11.well
+          //-.media
+            //-.pull-left(href="#")
+              //-img.media-object(ng-if="story.image", height="50", width="50", ng-src="{{ story.img }}", alt="{{ story.title }}")
+              //-span.glyphicon.glyphicon-book(ng-if="!story.image", style="font-size: 50px;")
+            //-.media-body
+              //-h4.media-heading {{ story.title }}
+//-div(ng-show="!author.worlds.length && !author.stories.length")
+  //-div.jumbotron
+    //-h1 Welcome to Storyboard
+    //-hr
+    //-div.row
+      //-div.col-xs-6
+        //-p It looks like you haven't created any worlds yet. Let's get started on that now!
+      //-div.col-xs-6
+        //-p  Or if your story is set in the real world and you don't need to do any world building, just jump right into your story.
+    //-div.row
+      //-div.col-xs-6
+        //-button.btn.btn-primary(ng-click="newWorld = true", ng-show="!newWorld")
+          //-span.glyphicon.glyphicon-globe
+          //-| &nbsp;&nbsp;Create a world
+        //-form(name="newWorldForm", novalidate, ng-show="newWorld")
+          //-.form-group
+            //-label.control-label(for="name", style="font-weight: normal") Let's start with a name. You'll be able to add lots of other details later.
+            //-input.form-control#name(name="name", ng-model="world.name")
+          //-.form-group.btn-row
+            //-button.btn.btn-primary(type="button", ng-click="saveWorld()") Save
+            //-button.btn.btn-default(type="button", ng-click="newWorld = false") Cancel
+          //-.form-group(ng-show="newWorldForm.error && !newWorldForm.errorDismissed")
+            //-.alert.alert-danger.alert-dismissable
+              //-button.close(type="button", aria-hidden="true", ng-click="newWorldForm.errorDismissed = true") &times;
+              //-| {{ newWorldForm.error }}
+      //-div.col-xs-6
+        //-button.btn.btn-primary(ng-click="newStory = true", ng-show="!newStory")
+          //-span.glyphicon.glyphicon-book
+          //-| &nbsp;&nbsp;Start a story
+        //-form(name="newStoryForm", novalidate, ng-show="newStory")
+          //-.form-group
+            //-label.control-label(for="title", style="font-weight: normal") What's your story called? Don't worry, you can change this later.
+            //-input.form-control#title(name="title", ng-model="story.title")
+          //-.form-group.btn-row
+            //-button.btn.btn-primary(type="button", ng-click="saveStory()") Save
+            //-button.btn.btn-default(type="button", ng-click="newStory = false") Cancel
+          //-.form-group(ng-show="newStoryForm.error && !newStoryForm.errorDismissed")
+            //-.alert.alert-danger.alert-dismissable
+              //-button.close(type="button", aria-hidden="true", ng-click="newStoryForm.errorDismissed = true") &times;
+              //-| {{ newStoryForm.error }}

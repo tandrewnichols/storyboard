@@ -7,6 +7,7 @@ module.exports = {
       'bower_components/jquery/dist/jquery.js',
       'bower_components/jquery.cookie/jquery.cookie.js',
       'bower_components/bootstrap/dist/js/bootstrap.js',
+      'bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.js',
       'bower_components/angular/angular.js',
       'bower_components/angular-animate/angular-animate.js',
       'bower_components/angular-resource/angular-resource.js',

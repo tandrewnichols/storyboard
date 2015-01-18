@@ -19,6 +19,10 @@ angular.module('app').config(function($urlRouterProvider, $stateProvider) {
         hideContainer: function($rootScope) {
           $rootScope.hideContainer = true;
           return true;
+        },
+        sidebar: function($rootScope) {
+          $rootScope.sidebar = true;
+          return true;
         }
       }
     })

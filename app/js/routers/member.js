@@ -42,6 +42,12 @@ angular.module('app').config(function($urlRouterProvider, $stateProvider) {
       url: '/dashboard',
       templateUrl: 'member/dashboard.html',
       controller: 'AuthorDashboard',
-      access: 'member'
+      access: 'member',
+      resolve: {
+        sidebar: function($rootScope) {
+          $rootScope.sidebar = true;
+          return true;
+        }
+      }
     });
 });
