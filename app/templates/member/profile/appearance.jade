@@ -16,9 +16,7 @@
   .row.mtl
     .col-xs-1(style="margin-top: 9px;") Inverse
     .col-xs-10
-      .btn-group
-        a.btn(ng-class="{ 'btn-primary': update.inverse, 'btn-default': !update.inverse }", ng-click="update.inverse = !update.inverse") On
-        a.btn(ng-class="{ 'btn-primary': !update.inverse, 'btn-default': update.inverse }", ng-click="update.inverse = !update.inverse") Off
+      input(type="checkbox", bs-switch="", ng-model="update.inverse")
   .row.mtx
     .col-sm-offset-1.col-xs-2
       button.btn.btn-primary.btn-block(ng-click="submit(update)", type="submit", ng-disabled="update.theme === author.theme && update.inverse === author.inverse") Submit

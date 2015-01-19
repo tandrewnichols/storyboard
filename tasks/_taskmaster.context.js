@@ -15,6 +15,8 @@ module.exports = {
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
+      'bower_components/angular-bootstrap-switch/dist/angular-bootstrap-switch.js',
+      'vendor/bootstrap-switch-master/dist/js/bootstrap-switch.js',
       'bower_components/lodash/dist/lodash.js',
       'node_modules/safe-obj/dist/safe.js',
       'node_modules/underscore.string/lib/underscore.string.js',
