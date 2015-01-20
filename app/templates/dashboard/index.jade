@@ -1,7 +1,14 @@
 #dashboard-menu.navmenu.navmenu-default.navmenu-fixed-left.sidebar
   ul.nav.navmenu-nav
-    li(ui-sref-active="active")
-      a(href="#", ui-sref="world.details") Worlds
+    li.dropdown(ui-sref-active="active")
+      a.dropdown-toggle(href="#", ui-sref="dashboard.world", data-toggle="dropdown")
+        | Worlds
+        b.caret
+      ul.dropdown-menu.navmenu-nav
+        li(ui-sref-active="active")
+          a(href="#", ui-sref="dashboard.world") New
+        li(ui-sref-active="active", ng-repeat="world in worlds")
+          a(href="#", ui-sref="dashboard.world({ slug: world.slug })") {{ world.name }}
     li(ui-sref-active="active")
       a(href="#", ui-sref="world.characters") Stories
     li(ui-sref-active="active")
