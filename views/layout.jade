@@ -21,7 +21,7 @@ html(lang="en")
       xhr.open('GET', '/api/author?with=story&with=world')
       xhr.send();
     base(href="/")
-  body(ng-init="isDev=#{isDev}", ng-class="{ sidebar: sidebar }")
+  body(ng-init="isDev=#{isDev}", ng-class="{ 'sidebar-on': state.includes('member.dashboard') }")
     div(ng-include="'header.html'", ng-controller="Header")
     .content(ng-class="{ container: !$root.hideContainer, 'container-fluid': $root.hideContainer }")
       block content
