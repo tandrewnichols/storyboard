@@ -23,3 +23,22 @@
     opacity: 0;
   }
 }
+
+.sidebar-padding {
+  padding-left: 250px;
+  transition: all 0.5s ease;
+  &.sidebar-off {
+    padding-left: 0;
+    & .navmenu {
+      width: 0;
+      transition: all 0.5s ease;
+    }
+  }
+  &.sidebar-on {
+    padding-left: 250px;
+    & .navmenu {
+      width: 250px;
+      transition: all 0.5s ease;
+    }
+  }
+}

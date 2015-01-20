@@ -1,4 +1,4 @@
-.navmenu.navmenu-default.navmenu-fixed-left.sidebar
+#dashboard-menu.navmenu.navmenu-default.navmenu-fixed-left.sidebar
   ul.nav.navmenu-nav
     li(ui-sref-active="active")
       a(href="#", ui-sref="world.details") Worlds
@@ -14,8 +14,9 @@
       a(href="#", ui-sref="world.locations") Locations
     li(ui-sref-active="active")
       a(href="#", ui-sref="world.ideas") Ideas
-div
+#dashboard
   div(ui-view="")
+    | Foo bar baz
 //-div(ng-show="author.worlds.length")
   //-.row
     //-.col-xs-6

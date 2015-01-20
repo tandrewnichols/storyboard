@@ -5,11 +5,5 @@ angular.module('app').config(function($stateProvider) {
       abstract: true,
       templateUrl: 'story/index.html',
       controller: 'Story',
-      resolve: {
-        hideContainer: function($rootScope) {
-          $rootScope.hideContainer = true;
-          return true;
-        }
-      }
     });
 });

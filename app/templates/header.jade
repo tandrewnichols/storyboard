@@ -4,51 +4,27 @@ nav.navbar.navbar-fixed-top(ng-class="{ 'navbar-default': !author.inverse, 'navb
       span.icon-bar
       span.icon-bar
       span.icon-bar
+    button.navbar-toggle.navmenu-toggle(type="button", ng-click="$root.sidebarHidden = !$root.sidebarHidden")
+      span.icon-bar
+      span.icon-bar
+      span.icon-bar
     a.navbar-brand(href="/") Storyboard
   .navbar-collapse.collapse.navbar-responsive-collapse
-    ul.nav.navbar-nav
+    ul.nav.navbar-nav.navbar-right(ng-show="author")
       li.dropdown(ng-if="isDev")
         a.dropdown-toggle(href="#", data-toggle="dropdown")
-          | Dev Tools&nbsp;
+          span.glyphicon.glyphicon-wrench
+          | &nbsp;&nbsp;Admin&nbsp;
           b.caret
         ul.dropdown-menu
           li: a(href="#", data-toggle="modal", data-target="#dump-modal") Data Dump
-    ul.nav.navbar-nav.navbar-right(ng-show="author")
-      li.dropdown
-        a.dropdown-toggle(href="#", data-toggle="dropdown")
-          span.glyphicon.glyphicon-globe
-          | &nbsp;&nbsp;Worlds&nbsp;&nbsp;
-          b.caret
-        ul.dropdown-menu
-          li
-            a(href="#", ui-sref="new({ type: 'world' })")
-              span.glyphicon.glyphicon-plus-sign
-              | &nbsp;&nbsp;New World&nbsp;&nbsp;
-          li(ng-repeat="world in author.worlds")
-            a(href="#", ui-sref="world.details({ slug: world.slug })")
-              span.glyphicon.glyphicon-globe
-              | &nbsp;&nbsp;{{ world.name }}&nbsp;&nbsp;
-      li.dropdown
-        a.dropdown-toggle(href="#", data-toggle="dropdown")
-          span.glyphicon.glyphicon-book
-          | &nbsp;&nbsp;Stories&nbsp;&nbsp;
-          b.caret
-        ul.dropdown-menu
-          li
-            a(href="#", ui-sref="story")
-              span.glyphicon.glyphicon-plus-sign
-              | &nbsp;&nbsp;New Story&nbsp&nbsp;
-          li(ng-repeat="story in author.stories")
-            a(href="#", ui-sref="story({ slug: story.slug })")
-              span.glyphicon.glyphicon-book
-              | &nbsp;&nbsp;{{ story.title }}&nbsp;&nbsp;
       li.dropdown
         a.dropdown-toggle(href="#", data-toggle="dropdown", style="width:100%; background-image: url('{{ author.gravatar }}&s=32'); background-repeat:no-repeat; padding-left: 50px; background-position: 10px 50%; background-size: 32px;")
           span.ellipsis(style="max-width: 200px;", title="{{ author.penname }}") &nbsp;&nbsp;{{ author.penname }}&nbsp;&nbsp;
           b.caret
         ul.dropdown-menu
           li
-            a(href="#", ui-sref="member.dashboard")
+            a(href="#", ui-sref="dashboard")
               span.glyphicon.glyphicon-home
               | &nbsp;&nbsp;Dashboard
           li

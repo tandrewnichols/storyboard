@@ -3,13 +3,8 @@ angular.module('app').config(function($urlRouterProvider, $stateProvider) {
   $stateProvider
     .state('member', {
       url: '',
-      template: '<ui-view/>',
-      resolve: {
-        hideContainer: function($rootScope) {
-          $rootScope.hideContainer = false;
-          return true;
-        }
-      }
+      abstract: true,
+      template: '<ui-view/>'
     })
     .state('member.join', {
       url: '/join',
@@ -38,16 +33,4 @@ angular.module('app').config(function($urlRouterProvider, $stateProvider) {
       templateUrl: 'member/profile/appearance.html',
       controller: 'AuthorAppearance'
     })
-    .state('member.dashboard', {
-      url: '/dashboard',
-      templateUrl: 'member/dashboard.html',
-      controller: 'AuthorDashboard',
-      access: 'member',
-      resolve: {
-        sidebar: function($rootScope) {
-          $rootScope.sidebar = true;
-          return true;
-        }
-      }
-    });
 });

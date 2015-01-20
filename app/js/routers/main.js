@@ -4,12 +4,6 @@ angular.module('app').config(function($locationProvider, $stateProvider, $urlRou
     .state('home', {
       url: '/',
       templateUrl: 'home.html',
-      controller: 'Home',
-      resolve: {
-        hideContainer: function($rootScope) {
-          $rootScope.hideContainer = false;
-          return true;
-        }
-      }
+      controller: 'Home'
     });
 });

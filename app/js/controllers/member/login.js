@@ -6,7 +6,7 @@ angular.module('app').controller('Login', function($scope, Api) {
       Api.Member.get($scope.member, function(member) {
         if (member.uid) {
           $scope.$root.author = member;
-          $scope.state.go('member.dashboard');
+          $scope.state.go('dashboard');
         }
       }, function(response) {
         $scope.error = _.safe(response, 'data.description', 'An error occurred while logging you in. Please try again later.');
