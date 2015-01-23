@@ -1,18 +1,9 @@
-.navmenu.navmenu-default.navmenu-fixed-left(style="width: 250px; margin-top: 53px;")
-  ul.nav.navmenu-nav
-    li(ui-sref-active="active")
-      a(href="#", ui-sref="world.details") Details
-    li(ui-sref-active="active")
-      a(href="#", ui-sref="world.characters") Characters
-    li(ui-sref-active="active")
-      a(href="#", ui-sref="world.magic") Magic
-    li(ui-sref-active="active")
-      a(href="#", ui-sref="world.events") Events
-    li(ui-sref-active="active")
-      a(href="#", ui-sref="world.items") Items
-    li(ui-sref-active="active")
-      a(href="#", ui-sref="world.locations") Locations
-    li(ui-sref-active="active")
-      a(href="#", ui-sref="world.ideas") Ideas
-div
-  div(ui-view="")
+.row
+  .col-xs-12
+    ul.nav.nav-pills
+      li(ui-sref-active="active")
+        a(href="#", ui-sref="dashboard.world.summary") Summary
+.row
+  .col-xs-12
+    hr.text-muted
+div(ui-view="")

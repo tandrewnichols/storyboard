@@ -1,9 +1,9 @@
 .row
   .col-xs-12
     ul.nav.nav-pills
-      li(ng-class="{ active: state.includes('member.profile.personal') }")
+      li(ui-sref-active="active")
         a(href="#", ui-sref="member.profile.personal") Personal
-      li(ng-class="{ active: state.includes('member.profile.appearance') }")
+      li(ui-sref-active="active")
         a(href="#", ui-sref="member.profile.appearance") Appearance
 .row
   .col-xs-12

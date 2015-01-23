@@ -16,6 +16,8 @@ module.exports = {
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/angular-bootstrap-switch/dist/angular-bootstrap-switch.js',
+      'bower_components/angular-strap/dist/angular-strap.js',
+      'bower_components/angular-strap/dist/angular-strap.tpl.js',
       'vendor/bootstrap-switch-master/dist/js/bootstrap-switch.js',
       'bower_components/lodash/dist/lodash.js',
       'node_modules/safe-obj/dist/safe.js',

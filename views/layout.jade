@@ -21,7 +21,7 @@ html(lang="en")
       xhr.open('GET', '/api/author?with=story&with=world')
       xhr.send();
     base(href="/")
-  body.sidebar-padding(ng-init="isDev=#{isDev}", ng-class="{ 'sidebar-on': state.includes('dashboard') && !sidebarHidden, 'sidebar-off': !state.includes('dashboard') || sidebarHidden }")
+    body(ng-init="isDev=#{isDev}", class={ 'sidebar-padding': url.indexOf('/dashboard') > -1} ng-class="{ 'sidebar-padding sidebar-on': state.includes('dashboard') && !sidebarHidden, 'sidebar-padding sidebar-off': sidebarHidden }")
     div(ng-include="'header.html'", ng-controller="Header")
     .content(ng-class="{ container: !state.includes('dashboard'), 'container-fluid': state.includes('dashboard') }")
       block content

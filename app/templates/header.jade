@@ -4,7 +4,7 @@ nav.navbar.navbar-fixed-top(ng-class="{ 'navbar-default': !author.inverse, 'navb
       span.icon-bar
       span.icon-bar
       span.icon-bar
-    button.navbar-toggle.navmenu-toggle(type="button", ng-click="$root.sidebarHidden = !$root.sidebarHidden")
+    button.navbar-toggle.navmenu-toggle(type="button", ng-click="$root.sidebarHidden = !$root.sidebarHidden", ng-show="state.includes('dashboard')")
       span.icon-bar
       span.icon-bar
       span.icon-bar

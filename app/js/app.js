@@ -1,4 +1,4 @@
-angular.module('app', ['ngResource', 'ui.router', 'ngRoute', 'ngSanitize', 'ngAnimate', 'ui.bootstrap', 'frapontillo.bootstrap-switch']).run(function($rootScope, $state, Redirect) {
+angular.module('app', ['ngResource', 'ui.router', 'ngRoute', 'ngSanitize', 'ngAnimate', 'ui.bootstrap', 'frapontillo.bootstrap-switch', 'mgcrea.ngStrap']).run(function($rootScope, $state, Redirect) {
   $rootScope.state = $state;
   _.mixin(_.string);
   _.mixin(_._safe);
