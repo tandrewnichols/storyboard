@@ -1,4 +1,13 @@
 angular.module('app').controller('World', function($scope, Api, $stateParams) {
+  //$scope.$watch(function() {
+    //console.log($stateParams.slug);
+    //return $stateParams.slug;
+  //}, function(newVal, oldVal) {
+    //console.log(newVal);
+    //if (newVal) {
+    //}
+  //});
+
   if ($stateParams.slug !== '~') {
     $scope.world = _.find($scope.$root.author.worlds, { slug: $stateParams.slug }); 
   } else {
@@ -6,6 +15,14 @@ angular.module('app').controller('World', function($scope, Api, $stateParams) {
     $scope.isNew = true;
   }
   $scope.edit = angular.copy($scope.world);
+
+  $scope.save = function() {
+    Api.World.save($scope.edit, function(world) {
+      $scope.worlds.push(world);
+      $scope.world = world;
+      $scope.edit = angular.copy($scope.world);
+    });
+  };
 
   $scope.update = function() {
     var diff = _.extractDiff($scope.edit, $scope.world);

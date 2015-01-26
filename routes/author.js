@@ -1,4 +1,6 @@
 var router = module.exports = require('express').Router();
+var params = require('express-params');
+params.extend(router);
 var bcrypt = require('bcrypt');
 var _ = require('lodash');
 var oneYear = 365*24*60*60*1000
@@ -6,6 +8,8 @@ var crypto = require('crypto');
 var canEdit = require('../lib/middleware/canEdit');
 var extend = require('config-extend');
 var async = require('async');
+
+router.param('uid', /^[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/);
 
 /*
  * Update a field on an existing author
@@ -51,6 +55,12 @@ router.get('/:uid', function(req, res, next) {
   });
 });
 
+router.get('/:type', function(req, res, next) {
+  req.author.getAllByType(req.params.type, function(err, nodes) {
+    res.status(200).json(_(nodes).values().flatten().value());
+  });
+});
+
 /*
  * Get currently logged in member, login, or check whether an email already exists
  * Invoked from angular with Api.author.get()
@@ -84,8 +94,8 @@ router.get('/', function(req, res, next) {
   // Not querying for author by email. If we have a logged in user, return that.
   } else if (req.author) {
     // If we're requesting additional resources with the author, fetch them now
-    if (req.query.with) {
-      req.author.getAllByType(req.query.with, function(err, nodes) {
+    if (req.query.include) {
+      req.author.getAllByType(req.query.include, function(err, nodes) {
         var author = req.author.toJson();
         res.status(200).json(extend(author, nodes));
       });
@@ -99,7 +109,7 @@ router.get('/', function(req, res, next) {
 
 /*
  * Update an author
- * Invoked from angular with Api.Member.update
+ * Invoked from angular with Api.Author.update
  */
 router.put('/:uid', canEdit, function(req, res, next) {
   // Author changing emails

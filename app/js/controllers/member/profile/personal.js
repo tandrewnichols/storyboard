@@ -10,7 +10,7 @@ angular.module('app').controller('AuthorPersonal', function($scope, Api) {
   $scope.changeEmail = function() {
     $scope.emailForm.error = '';
     $scope.emailForm.errorDismissed = false;
-    Api.Member.update({ uid: $scope.author.uid, email: $scope.update.email }, function(member) {
+    Api.Author.update({ uid: $scope.author.uid, email: $scope.update.email }, function(member) {
       $scope.$root.author = member;
       $scope.update = {};
     }, function(response) {
@@ -44,7 +44,7 @@ angular.module('app').controller('AuthorPersonal', function($scope, Api) {
     $scope.passwordForm.error = '';
     $scope.passwordForm.errorDismissed = '';
     $scope.update.uid = $scope.author.uid;
-    Api.Member.update($scope.update, function(member) {
+    Api.Author.update($scope.update, function(member) {
       $scope.update = {};
     }, function(response) {
       $scope.passwordForm.error = _.safe(response, 'data.description', 'An error occurred while updating your password. Please try again later.');

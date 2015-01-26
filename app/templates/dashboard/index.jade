@@ -6,7 +6,7 @@
         b.caret
       ul.dropdown-menu.navmenu-nav
         li(ui-sref-active="active")
-          a(href="#", ui-sref="dashboard.world.summary") New
+          a(href="#", ui-sref="dashboard.world.summary({ slug: '~' })") New
         li(ui-sref-active="active", ng-repeat="world in author.worlds")
           a(href="#", ui-sref="dashboard.world.summary({ slug: world.slug })") {{ world.name }}
     li(ui-sref-active="active")
@@ -23,3 +23,13 @@
       a(href="#", ui-sref="world.ideas") Ideas
 #dashboard
   div(ui-view="")
+    .row
+      .col-xs-12
+        div(ng-repeat="entity in entities")
+          .col-xs-3
+            .panel.panel-default.am-flix-x
+              .panel-heading
+                h3.panel-title {{ entity.name }}
+              .panel-body
+                p Foo bar baz
+

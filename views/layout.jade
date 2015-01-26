@@ -18,7 +18,7 @@ html(lang="en")
           }
         }
       };
-      xhr.open('GET', '/api/author?with=story&with=world')
+      xhr.open('GET', '/api/author?include=story&include=world')
       xhr.send();
     base(href="/")
     body(ng-init="isDev=#{isDev}", class={ 'sidebar-padding': url.indexOf('/dashboard') > -1} ng-class="{ 'sidebar-padding sidebar-on': state.includes('dashboard') && !sidebarHidden, 'sidebar-padding sidebar-off': sidebarHidden }")

@@ -20,7 +20,7 @@
       .col-xs-8.col-sm-offset-2(error="error", dismissed="dismissed", ng-show="error && !dismissed")
       .form-group
         .col-xs-8.col-sm-offset-2.btn-row
-          button.btn.btn-primary(type="submit", ng-click="update()", ng-disabled="!edit.name || edit | equals : world")
+          button.btn.btn-primary(type="submit", ng-click="isNew ? save() : update()", ng-disabled="!edit.name || edit | equals : world")
             span(ng-show="world.slug") Update
             span(ng-show="!world.slug") Save
           button.btn.btn-default(type="button", ng-click="reset()", ng-disabled="edit | equals : world") Reset

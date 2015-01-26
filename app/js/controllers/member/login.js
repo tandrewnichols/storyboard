@@ -3,7 +3,7 @@ angular.module('app').controller('Login', function($scope, Api) {
     $scope.error = null;
     $scope.dismissed = false;
     if (_.safe($scope, 'member.email') && _.safe($scope, 'member.password')) {
-      Api.Member.get($scope.member, function(member) {
+      Api.Author.get($scope.member, function(member) {
         if (member.uid) {
           $scope.$root.author = member;
           $scope.state.go('dashboard');

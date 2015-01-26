@@ -4,6 +4,11 @@ angular.module('app').config(function($urlRouterProvider, $stateProvider) {
       url: '/dashboard',
       templateUrl: 'dashboard/index.html',
       controller: 'Dashboard',
-      access: 'member'
+      access: 'member',
+      resolve: {
+        entities: function(Api) {
+          return Api.Author.fetch({ type: 'entity' }).$promise;
+        }
+      }
     });
 });

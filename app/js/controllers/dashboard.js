@@ -1,4 +1,6 @@
-angular.module('app').controller('Dashboard', function($scope, Api) {
+angular.module('app').controller('Dashboard', function($scope, Api, entities) {
+  $scope.entities = entities;
+
   $scope.saveWorld = function() {
     $scope.newWorldForm.error = '';
     $scope.newWorldForm.errorDismissed = false;
