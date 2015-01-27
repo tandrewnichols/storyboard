@@ -56,7 +56,7 @@ router.get('/:uid', function(req, res, next) {
 });
 
 router.get('/:type', function(req, res, next) {
-  req.author.getAllByType(req.params.type, function(err, nodes) {
+  req.author.getAllByType(req.params.type, Number(req.query.limit), function(err, nodes) {
     res.status(200).json(_(nodes).values().flatten().value());
   });
 });

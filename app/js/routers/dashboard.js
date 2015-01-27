@@ -7,7 +7,7 @@ angular.module('app').config(function($urlRouterProvider, $stateProvider) {
       access: 'member',
       resolve: {
         entities: function(Api) {
-          return Api.Author.fetch({ type: 'entity' }).$promise;
+          return Api.Author.fetch({ type: 'entity', limit: 0 }).$promise;
         }
       }
     });

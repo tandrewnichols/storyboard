@@ -43,31 +43,31 @@
     extractDiff: function(copy, origin) {
       var diff = {};
       if (_.isEqual(copy, origin)) {
-        return copy;
+        return _.clone(copy);
       } else {
         for (var k in copy) {
           if (!_.isEqual(copy[k], origin[k])) {
             if (!origin[k]) {
-              diff[k] = copy[k];
+              diff[k] = _.clone(copy[k]);
             } else if (_.isPlainObject(copy[k])) {
               var inner = mixins.extractDiff(copy[k], origin[k]);
               if (inner) {
-                diff[k] = inner;
+                diff[k] = _.clone(inner);
               }
             } else if (_.isArray(copy[k])) {
               var arr = [];
               _.each(copy[k], function(item, i) {
                 var inner = mixins.extractDiff(copy[k][i], origin[k][i]);
                 if (inner) {
-                  arr.push(inner);
+                  arr.push(_.clone(inner));
                 }
               });
 
               if (arr.length) {
-                diff[k] = arr;
+                diff[k] = _.clone(arr);
               }
             } else if (copy[k] !== origin[k]) {
-              diff[k] = copy[k];
+              diff[k] = _.clone(copy[k]);
             }
           }
         }

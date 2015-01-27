@@ -1,13 +1,4 @@
 angular.module('app').controller('World', function($scope, Api, $stateParams) {
-  //$scope.$watch(function() {
-    //console.log($stateParams.slug);
-    //return $stateParams.slug;
-  //}, function(newVal, oldVal) {
-    //console.log(newVal);
-    //if (newVal) {
-    //}
-  //});
-
   if ($stateParams.slug !== '~') {
     $scope.world = _.find($scope.$root.author.worlds, { slug: $stateParams.slug }); 
   } else {
@@ -32,6 +23,12 @@ angular.module('app').controller('World', function($scope, Api, $stateParams) {
       $scope.edit = angular.copy($scope.world);
     }, function(response) {
       $scope.error = response.data.description;  
+    });
+  };
+
+  $scope.remove = function(world) {
+    Api.World.remove({ uid: world.uid }, function() {
+      console.log(arguments);  
     });
   };
 

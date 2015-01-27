@@ -38,3 +38,15 @@ router.put('/:uid', function(req, res, next) {
     res.status(200).json(world.toJson());
   });
 });
+
+/*
+ * Delete an existing world
+ * Invocation: Api.World.remove
+ */
+router.delete('/:uid', function(req, res, next) {
+  req.models.World.find({ uid: req.params.uid }).deleteIncludingRelations(function(err, world) {
+    console.log(arguments);
+    if (err) return next(err);
+    res.status(200).end();
+  });
+});

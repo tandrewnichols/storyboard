@@ -70,6 +70,8 @@ module.exports = {
       if (typeof limit === 'function') {
         cb = limit;
         limit = 5;
+      } else if (typeof limit === 'undefined') {
+        limit = 5;
       }
 
       // Set up the query once now

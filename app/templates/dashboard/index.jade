@@ -25,11 +25,25 @@
   div(ui-view="")
     .row
       .col-xs-12
-        div(ng-repeat="entity in entities")
-          .col-xs-3
-            .panel.panel-default.am-flix-x
+        .entity.pull-left(ng-repeat="entity in entities", ng-controller="World")
+          .card(ng-class="{ flipped: flipped }")
+            .panel.panel-default.front
               .panel-heading
-                h3.panel-title {{ entity.name }}
+                span.h3.panel-title {{ entity.name }}
+                button.close(type="button", ng-click="flipped = true;") &times;
               .panel-body
                 p Foo bar baz
-
+            .panel.panel-default.back
+              .panel-heading
+                h3.panel-title Delete this entity?
+              .panel-body
+                .row
+                  .col-xs-12.text-center
+                    span This cannot be undone.
+                    br
+                    span.text-danger Are you sure you want to delete this entity?
+                .row.mtm
+                  .col-xs-6
+                    button.btn.btn-danger.btn-block(ng-click="remove(entity);") Yes
+                  .col-xs-6
+                    button.btn.btn-default.btn-block(ng-click="flipped = false;") No
