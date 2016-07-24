@@ -1,4 +1,4 @@
 module.exports = {
-  start: {},
-  stop: {}
+  start: 'start 7474',
+  stop: 'stop 7474'
 };

@@ -1,6 +1,4 @@
 var router = module.exports = require('express').Router();
-var params = require('express-params');
-params.extend(router);
 var bcrypt = require('bcrypt');
 var _ = require('lodash');
 var oneYear = 365*24*60*60*1000
@@ -8,14 +6,13 @@ var crypto = require('crypto');
 var canEdit = require('../lib/middleware/canEdit');
 var extend = require('config-extend');
 var async = require('async');
-
-router.param('uid', /^[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/);
+var uid = '/:uid([a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12})';
 
 /*
  * Update a field on an existing author
  * Invoked from Angular with author.$save()
  */
-router.post('/:uid', canEdit, function(req, res, next) {
+router.post(uid, canEdit, function(req, res, next) {
   req.author.update(req.body, function(err, author) {
     if (err) return next(err);
     res.status(200).json(author.toJson());
@@ -48,7 +45,7 @@ router.post('/', function(req, res, next) {
  * Lookup an author by uid
  * Invoked from angular with Api.Author.get() or Api.Author.query()
  */
-router.get('/:uid', function(req, res, next) {
+router.get(uid, function(req, res, next) {
   req.models.Author.get(req.params.uid, function(err, author) {
     if (err) return next(err);
     res.status(200).json(author.toJson());
@@ -111,7 +108,7 @@ router.get('/', function(req, res, next) {
  * Update an author
  * Invoked from angular with Api.Author.update
  */
-router.put('/:uid', canEdit, function(req, res, next) {
+router.put(uid, canEdit, function(req, res, next) {
   // Author changing emails
   if (req.body.email) {
     req.models.Author.findOne({ email: req.body.email }, function(err, author) {
